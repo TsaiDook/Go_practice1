@@ -17,6 +17,7 @@ func main() {
 	errorCount := 0
 
 	for {
+		time.Sleep(time.Second)
 		messages, err := fetchAndCheckStats()
 		if err != nil {
 			errorCount++
@@ -31,7 +32,6 @@ func main() {
 			}
 		}
 
-		time.Sleep(time.Second)
 	}
 }
 func fetchAndCheckStats() ([]string, error) {
