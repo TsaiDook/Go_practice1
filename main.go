@@ -109,7 +109,7 @@ func fetchAndCheckStats() ([]string, error) {
 		netUsage := usedNet * 100 / totalNet
 		if netUsage >= 90 {
 			freeBytes := totalNet - usedNet
-			freeMbit := freeBytes * 8 / 1024 / 1024
+			freeMbit := freeBytes / 1_000_000
 			messages = append(messages,
 				fmt.Sprintf("Network bandwidth usage high: %d Mbit/s available", freeMbit))
 		}
