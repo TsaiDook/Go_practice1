@@ -6,7 +6,6 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
-	"time"
 )
 
 const (
@@ -17,7 +16,6 @@ func main() {
 	errorCount := 0
 
 	for {
-		time.Sleep(time.Second)
 		messages, err := fetchAndCheckStats()
 		if err != nil {
 			errorCount++
@@ -25,15 +23,16 @@ func main() {
 				fmt.Println("Unable to fetch server statistic")
 				errorCount = 0
 			}
-		} else {
-			errorCount = 0
-			for _, msg := range messages {
-				fmt.Println(msg)
-			}
+			continue
 		}
 
+		errorCount = 0
+		for _, msg := range messages {
+			fmt.Println(msg)
+		}
 	}
 }
+
 func fetchAndCheckStats() ([]string, error) {
 	resp, err := http.Get(statsURL)
 	if err != nil {
